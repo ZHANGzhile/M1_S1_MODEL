@@ -5,7 +5,7 @@
         XU      mengqian    21306077
 */
 
-#include "fastFourierTransforme.h"
+#include "fastFourierTrans.h"
 
 // 结果储存在polyA
 void NaiveMultPoly(struct numComplex *polyA, struct numComplex *polyB);

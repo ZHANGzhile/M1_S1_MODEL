@@ -5,8 +5,8 @@
         XU      mengqian    21306077
 */
 
-#ifndef UTILS_H
-#define UTILS_H
+#ifndef UTILS
+#define UTILS
 #include <stdio.h>
 
 struct numComplex {

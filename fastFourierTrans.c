@@ -67,7 +67,7 @@ struct numComplex* fft(struct numComplex *num, int size){
         k += 1;
         num = extenstionVec(num, size, k);
     }
-    struct numComplex *res = coreFFT(num, size);
+    struct numComplex *res = coreFFT(num, pow(2,k));
     return res;
 }   
 

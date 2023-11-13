@@ -7,6 +7,5 @@
 
 #include "fastFourierTrans.h"
 
-// 结果储存在polyA
-void NaiveMultPoly(struct numComplex *polyA, struct numComplex *polyB);
-void fftMultPoly(struct numComplex *polyA, struct numComplex *polyB);
+struct numComplex* NaiveMultPoly(struct numComplex *polyA, int sizeA, struct numComplex *polyB, int sizeB);
+struct numComplex* fftMultPoly(struct numComplex *polyA, int sizeA, struct numComplex *polyB, int sizeB);

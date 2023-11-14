@@ -19,33 +19,39 @@ struct numComplex {
 // poly的实质是size大小的数组
 struct polynomial{
     struct numComplex* data;
-    int size;
+    int cpt;    // 数组末尾的索引, init à 0
+    int size;   // 数组的大小
 };
 
 
 // affichage
-void printComplexNumberVec(struct numComplex *numVec, int size);
+void printPoly(struct polynomial poly);
 
-// generate complex number
-struct numComplex* randomConsVec(int size);
-struct numComplex zeroComplexNum();
+// gestion des structures
 
-// init for polynomial
+// gestion pour numComplex
+struct numComplex creatComplexNum(double real, double imaginary);
+struct numComplex zeroComplexNum();     // 返回 0 + 0i
+struct numComplex randomConsNumber();   // 实部与虚部均为随机数
+int isEqNum(struct numComplex numA, struct numComplex numB);
+
+// gestion pour polynomial
 /*
     该部分的目的是为了方便管理poly对象，属于代码优化的一部分
     方便对象的管理以及内存管理，简化运行逻辑
     可以写入遇到的困难
     ** ZHOU a faire **
 */
-// 创建大小为size的poly vide
-struct polynomial createPoly(int size);
+struct polynomial createPoly(int size);     // 创建大小为size的poly vide, 不填入任何元素
+struct polynomial createRandomPoly(int size);   // 创建对象后随机填入元素
 // 删除对象
-void delPoly(struct polynomial *poly);
+void delPoly(struct polynomial poly);
 // 对poly对象的一些操作：添加，删除等操作
-void addElement(struct numComplex el, struct polynomial *poly);
-void subElement(struct numComplex el, struct polynomial *poly);
+int addElement(struct numComplex el, struct polynomial* poly); // 如果满了 size == cpt, 自动将容量翻倍 size*=2
+int subElement(int index, struct polynomial* poly); // 返回1表示删除成功，0表示失败
+int isEqPoly(struct polynomial polyA, struct polynomial polyB);
 
-// calculations for complex number
+// arithmétique élémentaire for complex number
 struct numComplex addComplexNumber(struct numComplex numA, struct numComplex numB);      
 struct numComplex multComplexNumber(struct numComplex numA, struct numComplex numB);  
 struct numComplex divComplexNum(int n, struct numComplex num);
@@ -56,8 +62,6 @@ struct numComplex divComplexNum(int n, struct numComplex num);
     也就是说mode 0返回inverse fft的omega, mode 1返回正常fft
 */ 
 // 使用动态规划
-struct numComplex* primitiveRoot(int n);
-
-
-
+struct polynomial primitiveRoot(int n);
+int getNearestK(int size);
 #endif

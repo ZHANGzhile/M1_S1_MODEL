@@ -7,5 +7,5 @@
 
 #include "fastFourierTrans.h"
 
-struct numComplex* NaiveMultPoly(struct numComplex *polyA, int sizeA, struct numComplex *polyB, int sizeB);
-struct numComplex* fftMultPoly(struct numComplex *polyA, int sizeA, struct numComplex *polyB, int sizeB);
+struct polynomial NaiveMultPoly(struct polynomial polyA, struct polynomial polyB);
+struct polynomial fftMultPoly(struct polynomial polyA, struct polynomial polyB);

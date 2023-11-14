@@ -15,66 +15,67 @@ int main(){
     printf("---------------------------------------------------------------\n");
     printf("test for func : randomConsVecNum\n");
     int size = rand()%10;
-    struct numComplex *numVec = randomConsVec(size);
-    printComplexNumberVec(numVec, size);
+    struct polynomial polyTestRandom = createRandomPoly(size);
+    printPoly(polyTestRandom);
+    delPoly(polyTestRandom);
 
     //tests for primitiveRoot
     printf("---------------------------------------------------------------\n");
     printf("test for func : primitiveRoot\n");
-    int pri_size = 7;
-    struct numComplex *primitiveList = primitiveRoot(pri_size);
-    printComplexNumberVec(primitiveList, pri_size);
+    int pri_size = 4;
+    struct polynomial primitiveList = primitiveRoot(pri_size);
+    printPoly(primitiveList);
+    delPoly(primitiveList);
 
     printf("---------------------------------------------------------------\n");
     printf("test for func : fft and fftInverse\n");
-    //struct numComplex* fft_res = fft(numVec, size);
-    //printComplexNumberVec(fft_res, size);
-
-    struct numComplex* ls = malloc(sizeof(struct numComplex)*6);
+    // init data for tests
+    struct polynomial poly = createPoly(4);
     struct numComplex el1 = {1, 0};
     struct numComplex el2 = {2, 0};
-    struct numComplex el3 = {4, 0};
-    struct numComplex el4 = {8, 0};
-    struct numComplex el5 = {16, 0};
-    struct numComplex el6 = {32, 0};
-    ls[0] = el1;
-    ls[1] = el2;
-    ls[2] = el3;
-    ls[3] = el4;
-    ls[4] = el5;
-    ls[5] = el6;
-    struct numComplex* ls_res = fft(ls, 6);
-    printComplexNumberVec(ls_res, 8);
-
-    // liberer le memoire
-    //free(fft_res);
-    free(ls_res);
-    free(numVec);
-    free(primitiveList);
+    struct numComplex el3 = {3, 0};
+    struct numComplex el4 = {4, 0};
+    // struct numComplex el5 = {16, 0};
+    // struct numComplex el6 = {32, 0};
+    addElement(el1, &poly);
+    addElement(el2, &poly);
+    addElement(el3, &poly);
+    addElement(el4, &poly);
+    // addElement(el5, &poly);
+    // addElement(el6, &poly);
+    // end of init
+    // poly = fft(poly, getNearestK(poly.cpt));
+    struct polynomial res_fft = fft(poly, getNearestK(poly.size));
+    printPoly(res_fft);
+    delPoly(res_fft);
 
     // les tests pour multPoly
 
     // creer deux polynomial random
     printf("---------------------------------------------------------------\n");
+    printf("test for func : mult of poly\n");
     int sizeA = rand()%10;
-    struct numComplex *polyA = randomConsVec(sizeA);
-    printComplexNumberVec(polyA, sizeA);
+    struct polynomial polyA = createRandomPoly(sizeA);
+    printf("polyA :\n");
+    printPoly(polyA);
     
     printf("---------------------------------------------------------------\n");
     int sizeB = rand()%10;
-    struct numComplex *polyB = randomConsVec(sizeB);
-    printComplexNumberVec(polyB, sizeB);
+    struct polynomial polyB = createRandomPoly(sizeB);
+    printf("polyB :\n");
+    printPoly(polyB);
 
     printf("---------------------------------------------------------------\n");
-    struct numComplex *multPoly = NaiveMultPoly(polyA, sizeA, polyB, sizeB);
-    printComplexNumberVec(multPoly, sizeA+sizeB-1);
+    struct polynomial multPoly = NaiveMultPoly(polyA, polyB);
+    printf("poly by naive methode\n");
+    printPoly(multPoly);
 
     printf("---------------------------------------------------------------\n");
-    struct numComplex *multFFTpoly = fftMultPoly(polyA, sizeA, polyB, sizeB);
-    printComplexNumberVec(multFFTpoly, sizeA+sizeB-1);
+    struct polynomial multFFTpoly = fftMultPoly(polyA, polyB);
+    printPoly(multFFTpoly);
 
-    free(multPoly);
-    free(multFFTpoly);
+    delPoly(multPoly);
+    delPoly(multFFTpoly);
 
     return 0;
 }

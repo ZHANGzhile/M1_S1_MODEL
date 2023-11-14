@@ -1,5 +1,3 @@
-# Makefile for a simple C program
-
 # 编译器
 CC = gcc
 

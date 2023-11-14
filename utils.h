@@ -16,12 +16,34 @@ struct numComplex {
     double imaginary;     // 虚数部
 };
 
+// poly的实质是size大小的数组
+struct polynomial{
+    struct numComplex* data;
+    int size;
+};
+
+
 // affichage
 void printComplexNumberVec(struct numComplex *numVec, int size);
 
 // generate complex number
 struct numComplex* randomConsVec(int size);
 struct numComplex zeroComplexNum();
+
+// init for polynomial
+/*
+    该部分的目的是为了方便管理poly对象，属于代码优化的一部分
+    方便对象的管理以及内存管理，简化运行逻辑
+    可以写入遇到的困难
+    ** ZHOU a faire **
+*/
+// 创建大小为size的poly vide
+struct polynomial createPoly(int size);
+// 删除对象
+void delPoly(struct polynomial *poly);
+// 对poly对象的一些操作：添加，删除等操作
+void addElement(struct numComplex el, struct polynomial *poly);
+void subElement(struct numComplex el, struct polynomial *poly);
 
 // calculations for complex number
 struct numComplex addComplexNumber(struct numComplex numA, struct numComplex numB);      
@@ -35,4 +57,7 @@ struct numComplex divComplexNum(int n, struct numComplex num);
 */ 
 // 使用动态规划
 struct numComplex* primitiveRoot(int n);
+
+
+
 #endif

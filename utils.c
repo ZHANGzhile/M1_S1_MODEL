@@ -121,7 +121,7 @@ struct numComplex divComplexNum(int n, struct numComplex num){
     return res;
 }
 
-struct polynomial primitiveRoot(int n){
+struct polynomial rootList(int n){
     struct polynomial res = createPoly(n);
     
     // debut de init

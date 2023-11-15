@@ -22,7 +22,7 @@ struct polynomial NaiveMultPoly(struct polynomial polyA, struct polynomial polyB
 
 struct polynomial fftMultPoly(struct polynomial polyA, struct polynomial polyB){
     int maxDegree = polyA.size+polyB.size-1;
-    // Compute the FFTs of P and Q with omega a primitive nth root of unity,
+    // Compute the FFTs of P and Q with omega a primitive nth root of unity, with n > size of P + Q
     int k = getNearestK(maxDegree);
     struct polynomial resP = fft(polyA, k);
     struct polynomial resQ = fft(polyB, k);
@@ -30,7 +30,7 @@ struct polynomial fftMultPoly(struct polynomial polyA, struct polynomial polyB){
 
     // Multiply coefficient by coefficient these FFTs to get the FFT of R, where R = PQ
     for (int i = 0; i < stocker.size; i++){
-        addElement( multComplexNumber(resP.data[i], resQ.data[i]), &stocker);
+        addElement( multComplexNumber(resP.data[i], resQ.data[i]), &stocker); //res[i] = p[i]*q[i]
     }
 
     // Compute the inverse FFT of the FFT of R to retrieve R

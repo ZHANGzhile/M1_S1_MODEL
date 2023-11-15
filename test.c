@@ -23,7 +23,7 @@ int main(){
     printf("---------------------------------------------------------------\n");
     printf("test for func : primitiveRoot\n");
     int pri_size = 4;
-    struct polynomial primitiveList = primitiveRoot(pri_size);
+    struct polynomial primitiveList = rootList(pri_size);
     printPoly(primitiveList);
     delPoly(primitiveList);
 

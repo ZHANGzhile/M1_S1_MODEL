@@ -62,6 +62,6 @@ struct numComplex divComplexNum(int n, struct numComplex num);
     也就是说mode 0返回inverse fft的omega, mode 1返回正常fft
 */ 
 // 使用动态规划
-struct polynomial rootList(int n);
+struct polynomial primitiveRoot(int n);
 int getNearestK(int size);
 #endif

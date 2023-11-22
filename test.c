@@ -23,7 +23,7 @@ int main(){
     printf("---------------------------------------------------------------\n");
     printf("test for func : primitiveRoot\n");
     int pri_size = 4;
-    struct polynomial primitiveList = rootList(pri_size);
+    struct polynomial primitiveList = primitiveRoot(pri_size);
     printPoly(primitiveList);
     delPoly(primitiveList);
 
@@ -74,6 +74,7 @@ int main(){
     struct polynomial multFFTpoly = fftMultPoly(polyA, polyB);
     printPoly(multFFTpoly);
 
+    isEqPoly(multFFTpoly, multPoly);
     delPoly(multPoly);
     delPoly(multFFTpoly);
 

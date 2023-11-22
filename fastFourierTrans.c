@@ -51,7 +51,7 @@ struct polynomial coreFFT(struct polynomial poly){
         p_even = coreFFT(p_even);
         
         // 回代部分
-        struct polynomial primitiveList = rootList(poly.size);
+        struct polynomial primitiveList = primitiveRoot(poly.size);
         for (int i = 0; i < poly.size/2; i++){      
             res.data[i] = addComplexNumber(p_even.data[i], 
                                             multComplexNumber((primitiveList.data[i]), p_odd.data[i])
@@ -84,11 +84,10 @@ struct polynomial fft(struct polynomial poly, int k){
 struct polynomial fftInverse(struct polynomial poly, int k){
     poly = fft(poly, k);
     // inverse fft 最后需要乘1/n
-    struct polynomial res = createPoly(poly.size); 
-    // 放入第一个元素 P(1)
+    struct polynomial res = createPoly(poly.size);
     addElement(divComplexNum(poly.size, poly.data[0]), &res); 
     for (int i = 1; i < poly.size; i++){
-        addElement(divComplexNum(poly.size, poly.data[poly.size-i]), &res); //将i位改成size-i
+        addElement(divComplexNum(poly.size, poly.data[poly.size-i]), &res);  
     }
     delPoly(poly);
     return res;

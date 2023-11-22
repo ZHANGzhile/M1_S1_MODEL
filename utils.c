@@ -6,6 +6,9 @@
 */
 
 #include "utils.h"
+#include "math.h"
+
+#define precision 1/pow(2, 43)
 
 // debut de la partie : affichage
 void printComplexNumber(struct numComplex num){
@@ -35,11 +38,13 @@ struct numComplex zeroComplexNum(){
 }
 
 struct numComplex randomConsNumber(){
-    return creatComplexNum(rand()%10, rand()%10);
+    double real = ((double)rand() / RAND_MAX) * 10.0;
+    double imaginary = ((double)rand() / RAND_MAX) * 10.0;
+    return creatComplexNum(real, imaginary);
 } 
 
 int isEqNum(struct numComplex numA, struct numComplex numB){
-    if (numA.real == numB.real && numA.imaginary == numB.imaginary){
+    if (fabs(numA.real - numB.real) < precision && fabs(numA.imaginary - numB.imaginary) < precision){
         return 1;
     }
     return 0;
@@ -94,9 +99,11 @@ int isEqPoly(struct polynomial polyA, struct polynomial polyB){
     }
     for(int i = 0; i < polyA.cpt; i++){
         if (! isEqNum(polyA.data[i], polyB.data[i])){
+            printf("%d\n", i);
             return 0;
         }
     }
+    printf("all ok\n");
     return 1;
 }
 // fin de la partie : gestion des structures
@@ -121,7 +128,7 @@ struct numComplex divComplexNum(int n, struct numComplex num){
     return res;
 }
 
-struct polynomial rootList(int n){
+struct polynomial primitiveRoot(int n){
     struct polynomial res = createPoly(n);
     
     // debut de init

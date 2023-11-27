@@ -109,6 +109,13 @@ int isEqPoly(struct polynomial polyA, struct polynomial polyB){
 // fin de la partie : gestion des structures
 
 // debut de la partie : arithmétique élémentaire pour complex number
+double add_prim(double a, double b){
+    if (b < 0){
+        return (a*a - b*b) / (a + b);
+    }
+    return a + b;
+}
+
 struct numComplex addComplexNumber(struct numComplex numA, struct numComplex numB){
     struct numComplex res = {numA.real + numB.real, numA.imaginary + numB.imaginary };
     return res;

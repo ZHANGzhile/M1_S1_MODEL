@@ -5,19 +5,16 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c99
 
 # 目标文件
-TARGET = test
+TEST_TARGET = test
 
 # 源文件
-SRCS = test.c utils.c fastFourierTrans.c multPoly.c
+SRCS = test.c exemple.c utils.c fastFourierTrans.c multPoly.c
 
 # 生成目标文件列表
 OBJS = $(SRCS:.c=.o)
 
-# 默认构建规则
-all: $(TARGET)
-
 # 链接目标文件生成可执行文件
-$(TARGET): $(OBJS)
+$(TEST_TARGET): $(OBJS)
 	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
 
 # 生成目标文件

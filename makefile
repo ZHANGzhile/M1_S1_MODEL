@@ -1,38 +1,41 @@
-# 编译器
 CC = gcc
-
-# 编译选项
 CFLAGS = -Wall -Wextra -std=c99
 
-# 目标文件
+# tagert fils 
+TEST_TARGET = test # un petit exemple du prog
+COMPARE = compare  # produit les donnees pour presenter la resultat
+
+# sources
+SRC_DIR = src
+OBJ_DIR = obj
+BIN_DIR = bin
 TEST_TARGET = test
 COMPARE = compare
 
-# 源文件
-SRCS_TEST = test.c utils.c fastFourierTrans.c multPoly.c
-SRCS = comparison.c utils.c fastFourierTrans.c multPoly.c
+# define les fichers source et les fichers obj
+SRC_TEST = $(wildcard $(SRC_DIR)/*.c) $(OBJ_DIR)/test.o
+OBJ_TESTS = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_TEST))
 
-# 生成目标文件列表
-OBJS_TEST = $(SRCS_TEST:.c=.o)
-OBJS = $(SRCS:.c=.o)
+SRC_COMAPRE = $(wildcard $(SRC_DIR)/*.c) $(OBJ_DIR)/comparison.o
+OBJ_COMPARE = $(patsubst $(SRC_DIR)/%.c,$(OBJ_DIR)/%.o,$(SRC_COMAPRE))
 
-all: $(TEST_TARGET) $(COMPARE)
+# linkage 
+$(TEST_TARGET): $(OBJ_TESTS)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$(TEST_TARGET) $(OBJ_TESTS)
 
-# 链接目标文件生成可执行文件
-$(TEST_TARGET): $(OBJS_TEST)
-	$(CC) $(CFLAGS) -o $(TEST_TARGET) $(OBJS_TEST)
+$(COMPARE): $(OBJ_COMPARE)
+	$(CC) $(CFLAGS) -o $(BIN_DIR)/$(COMPARE) $(OBJ_COMPARE)
 
-$(COMPARE): $(OBJS)
-	$(CC) $(CFLAGS) -o $(COMPARE) $(OBJS)
-
-# 生成目标文件
-%.o: %.c
+# compile les fichers source
+$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $^ -o $@
 
-# 清理生成的文件
-clean:
-	rm -f $(TARGET) $(OBJS)
+$(OBJ_DIR)/%.o : %.c
+	$(CC) $(CFLAGS) -c $^ -o $@
 
-# 检查内存泄漏
+clean:
+	rm -f $(OBJ_DIR)/*.o bin/test bin/compare
+
+# verifier la fuite de mémoire
 leak: 
-	leaks -atExit -- ./$(TARGET)
+	leaks -atExit -- ./$(BIN_DIR)/TEST_TARGET

@@ -6,9 +6,9 @@
 */
 
 #include <time.h>
-#include "utils.h"
-#include "fastFourierTrans.h"
-#include "multPoly.h"
+#include "src/utils.h"
+#include "src/fastFourierTrans.h"
+#include "src/multPoly.h"
 
 int main(){
     // tests for random data

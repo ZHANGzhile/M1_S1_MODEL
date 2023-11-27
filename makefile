@@ -10,7 +10,7 @@ COMPARE = compare
 
 # 源文件
 SRCS_TEST = test.c utils.c fastFourierTrans.c multPoly.c
-SRCS = comparaision.c utils.c fastFourierTrans.c multPoly.c
+SRCS = comparison.c utils.c fastFourierTrans.c multPoly.c
 
 # 生成目标文件列表
 OBJS_TEST = $(SRCS_TEST:.c=.o)

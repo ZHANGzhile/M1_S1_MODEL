@@ -16,7 +16,7 @@
 * en python : pandas, pyplot
 * en C : time.h, math.h
 
-**Pour lancer le programme** : 
+**Pour lancer le programme** : <br>
 ``` make test && ./bin/test``` : une petite exemple du projet, qui conclue les tests du fonction
 
 ```  make leak ``` : Utilisé pour voir s'il y a une fuite de mémoire dans le test

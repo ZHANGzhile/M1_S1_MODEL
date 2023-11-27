@@ -6,16 +6,24 @@ CFLAGS = -Wall -Wextra -std=c99
 
 # 目标文件
 TEST_TARGET = test
+COMPARE = compare
 
 # 源文件
-SRCS = test.c exemple.c utils.c fastFourierTrans.c multPoly.c
+SRCS_TEST = test.c utils.c fastFourierTrans.c multPoly.c
+SRCS = comparaision.c utils.c fastFourierTrans.c multPoly.c
 
 # 生成目标文件列表
+OBJS_TEST = $(SRCS_TEST:.c=.o)
 OBJS = $(SRCS:.c=.o)
 
+all: $(TEST_TARGET) $(COMPARE)
+
 # 链接目标文件生成可执行文件
-$(TEST_TARGET): $(OBJS)
-	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS)
+$(TEST_TARGET): $(OBJS_TEST)
+	$(CC) $(CFLAGS) -o $(TEST_TARGET) $(OBJS_TEST)
+
+$(COMPARE): $(OBJS)
+	$(CC) $(CFLAGS) -o $(COMPARE) $(OBJS)
 
 # 生成目标文件
 %.o: %.c

@@ -1,12 +1,29 @@
 ### organisation de archive
-les fichers .c et .h (sauf que test.c) : defini les fonctions de nessaire
-    - utils : principalement les actions aux base pour les objects :
-        - création / de l'object
-        - ajouter / supprimer le/les élément(s) de l'object
-        - réalizstions de l'arithmétique élémentaire pour les nombres complexes 
-    - fastFourierTrans : algorithems de fft et fft inverse
+
+1. archive /src: les fichers .c et .h qui definissent les fonctions de nessaire 
+    - utils : définition et gestion des objects
+        - deux struct : numComplex et polynomial
+        - arithmétique élémentaire pour des entiers complex
+        - ajouter, supprimer élément dans l'object 
+    -  fastFourierTrans : algorithems de fft et fft inverse
+        - la précision du algo est en $2^{-42}$
     - multPoly : implementation de mult de poly en methode naïve et en base de fft
-archive data : stoker les données de expérimentation et les graphe pour analyser la complexité de l'algo et la résultat dans la rapport
+2. archive /bin et /obj : Placement des exécutables et des fichiers .o
+3. benchmark_results.csv : liste des donnees
 
 ### lancement pour le projet
-``` make test ```
+**Requirements** : 
+* en python : pandas, pyplot
+* en C : time.h, math.h
+
+**Pour lancer le programme** : 
+``` make test && ./bin/test``` : une petite exemple du projet, qui conclue les tests du fonction
+
+```  make leak ``` : Utilisé pour voir s'il y a une fuite de mémoire dans le test
+
+```  make leak ``` : vider tous les fichers dans /obj et /bin
+
+``` make compare && ./bin/compare numTest``` : produit un ficher benchmark_result.csv, pour stocker le temps consomme par l'algo du deux version de multPoly. **numTsest** est un argument passé qui indique la degree maximum du polynomial
+
+``` python3 traceGraph.py ``` : produit un graphe linéaire pour analyse complexité de l'algo
+    

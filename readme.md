@@ -21,7 +21,7 @@
 
 ```  make leak ``` : Utilisé pour voir s'il y a une fuite de mémoire dans le test
 
-```  make leak ``` : vider tous les fichers dans /obj et /bin
+```  make clean ``` : vider tous les fichers dans /obj et /bin
 
 ``` make compare && ./bin/compare numTest``` : produit un ficher benchmark_result.csv, pour stocker le temps consomme par l'algo du deux version de multPoly. **numTsest** est un argument passé qui indique la degree maximum du polynomial
 
